@@ -103,32 +103,32 @@
 
         <div class="grid grid-cols-12 gap-6">
             <div class="col-span-12 lg:col-span-8 tarjeta">
-                <h3 class="font-bold text-white mb-6">Productos más vendidos</h3>
+                <h3 class="font-bold text-white mb-6">Atletas destacados en el mes</h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left">
                         <thead class="text-xs text-gray-500 border-b border-gray-800">
                             <tr>
-                                <th class="pb-4 uppercase">Producto</th>
-                                <th class="pb-4 uppercase text-center">Volumen</th>
-                                <th class="pb-4 uppercase text-right">Ingresos</th>
+                                <th class="pb-4 uppercase">Nombre</th>
+                                <th class="pb-4 uppercase text-center">Rendimiento</th>
+                                <th class="pb-4 uppercase text-right">Edad</th>
                             </tr>
                         </thead>
                         <tbody class="text-sm">
                             <tr class="border-b border-gray-800/50 hover:bg-white/5 transition">
                                 <td class="py-4 flex items-center gap-3">
-                                    <div class="bg-indigo-500/20 p-2 rounded text-indigo-400"><i class="fas fa-laptop"></i></div>
-                                    <div>Portátil ENVY <br><small class="text-gray-500 italic">HP</small></div>
+                                    <div class="bg-indigo-500/20 p-2 rounded text-indigo-400"><i class="fas fa-swimmer text-xl"></i></div>
+                                    <div>Jesus <br><small class="text-gray-500 italic">Hernandez</small></div>
                                 </td>
                                 <td class="text-center">12.4k <span class="text-green-500 ml-2">↑</span></td>
-                                <td class="text-right font-bold text-white">$12,400</td>
+                                <td class="text-right font-bold text-white">19</td>
                             </tr>
                             <tr class="border-b border-gray-800/50 hover:bg-white/5 transition">
                                 <td class="py-4 flex items-center gap-3">
-                                    <div class="bg-orange-500/20 p-2 rounded text-orange-400"><i class="fas fa-mobile-alt"></i></div>
-                                    <div>iPhone 13 <br><small class="text-gray-500 italic">Apple</small></div>
+                                    <div class="bg-orange-500/20 p-2 rounded text-orange-400"><i class="fas fa-swimmer text-xl"></i></div>
+                                    <div>Maikol <br><small class="text-gray-500 italic">Parra</small></div>
                                 </td>
                                 <td class="text-center">8.2k <span class="text-red-500 ml-2">↓</span></td>
-                                <td class="text-right font-bold text-white">$84,345</td>
+                                <td class="text-right font-bold text-white">21</td>
                             </tr>
                         </tbody>
                     </table>

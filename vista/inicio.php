@@ -25,10 +25,37 @@
         <header class="flex justify-between items-center mb-8">
             <h1 class="text-2xl font-bold text-white">Panel de Inicio</h1>
             <div class="flex items-center gap-6">
-                <div class="relative text-gray-400">
-                    <i class="fas fa-bell text-xl"></i>
-                    <span class="absolute -top-1 -right-1 bg-red-500 w-2 h-2 rounded-full"></span>
-                </div>
+
+
+<div class="relative group flex items-center justify-center w-32 h-10 transition-all duration-300 cursor-pointer">
+    
+    <div class="absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:opacity-0 group-hover:scale-50 text-gray-400">
+        <i class="fas fa-bell text-xl"></i>
+        <span class="absolute top-2 right-12 bg-red-500 w-2 h-2 rounded-full border border-[#0f0d23]"></span>
+    </div>
+
+    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 text-white font-bold text-xs uppercase tracking-tighter whitespace-nowrap">
+        Notificaciones
+    </div>
+    
+</div>
+
+
+<div class="relative group flex items-center justify-center w-32 h-10 transition-all duration-300 cursor-pointer">
+    
+    <div class="absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:opacity-0 group-hover:scale-50 text-gray-400">
+        <i class="fas fa-question-circle text-xl"></i>
+        <span class="absolute top-2 right-12 bg-red-500 w-2 h-2 rounded-full border border-[#0f0d23]"></span>
+    </div>
+
+    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 text-white font-bold text-xs uppercase tracking-tighter whitespace-nowrap">
+        Guia de ayuda
+    </div>
+    
+</div>
+
+
+
                 <div class="flex items-center gap-3 border-l border-gray-700 pl-6">
                     <span class="text-sm text-white font-medium">Admin Usuario</span>
                     <img src="https://ui-avatars.com/api/?name=Admin&background=4f46e5&color=fff" class="w-10 h-10 rounded-full border-2 border-indigo-500">

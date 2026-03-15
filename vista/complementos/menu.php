@@ -30,7 +30,7 @@
 
         <div class="flex items-center gap-3 p-3 rounded-xl transition cursor-pointer group hover:text-white hover:bg-white/5">
             <i class="fas fa-layer-group w-5 text-center text-indigo-400 group-hover:text-white"></i> 
-            <span>Categorías</span>
+            <a href="vista/categorias.php"><span>Categorías</span></a>
         </div>
 
         <div class="flex items-center gap-3 p-3 rounded-xl transition cursor-pointer group hover:text-white hover:bg-white/5">

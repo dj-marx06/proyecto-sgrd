@@ -6,7 +6,7 @@
 
 // 1. Configuración de la Base de Datos
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'sgrd_db'); // <--- Cambia esto por el nombre real de tu BD
+define('DB_NAME', 'prueba'); // <--- Cambia esto por el nombre real de tu BD
 define('DB_USER', 'root');           // <--- Tu usuario de MySQL
 define('DB_PASS', '');               // <--- Tu contraseña de MySQL
 define('DB_CHARSET', 'utf8');

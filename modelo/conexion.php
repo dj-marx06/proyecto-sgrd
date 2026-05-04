@@ -5,7 +5,7 @@ class Conexion {
     private $host = "localhost";
     private $user = "root";       // Tu usuario de base de datos
     private $pass = "";           // Tu contraseña de base de datos
-    private $db   = "sgrd_db"; // El nombre de tu base de datos
+    private $db   = "prueba"; // El nombre de tu base de datos
     private $pdo;
 
     public function __construct() {

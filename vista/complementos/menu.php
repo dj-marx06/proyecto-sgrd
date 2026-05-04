@@ -23,6 +23,15 @@
             <span>Entrenadores</span>
         </div>
 
+<!-- Enlace al módulo de Atletas -->
+<a href="?p=atleta" class="flex items-center gap-3 p-3 rounded-xl transition cursor-pointer group hover:text-white hover:bg-white/5 <?php echo ($pagina == 'atleta') ? 'bg-white/10 text-white' : ''; ?>">
+    <i class="fas fa-swimmer w-5 text-center text-indigo-400 group-hover:text-white <?php echo ($pagina == 'atleta') ? 'text-white' : ''; ?>"></i> 
+    <span class="font-medium">Atleta</span>
+</a>
+
+
+        
+
         <div class="flex items-center gap-3 p-3 rounded-xl transition cursor-pointer group hover:text-white hover:bg-white/5">
             <i class="fas fa-address-book w-5 text-center text-indigo-400 group-hover:text-white"></i> 
             <span>Miembros</span>

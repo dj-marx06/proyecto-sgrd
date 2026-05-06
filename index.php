@@ -1,5 +1,5 @@
 <?php
-/*Hola diego cambio*/
+/*Hola diego .*/
 /**
  * ARCHIVO: index.php
  * Punto de entrada principal (Front Controller)

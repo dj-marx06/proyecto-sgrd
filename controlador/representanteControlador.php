@@ -30,31 +30,36 @@ class representanteControlador {
         }
 
         try {
+            // Iniciamos la transacción ACID
             $this->conn->beginTransaction();
 
             $rep = new Representante($this->conn);
-            $rep->cedula     = $data->cedula;
-            $rep->nombres    = $data->nombres;
-            $rep->apellidos  = $data->apellidos;
-            $rep->telefono   = $data->telefono;
+            $rep->cedula = $data->cedula;
+            $rep->nombres = $data->nombres;
+            $rep->apellidos = $data->apellidos;
+            $rep->telefono_principal = $data->telefonoP;
+            $rep->telefono_emergencia = $data->telefonoE;
+            $rep->correo = $data->email;
             $rep->parentesco = $data->parentesco;
-            $rep->email      = $data->email;
+            $rep->direccion_residencia = $data->direccion;
 
-            $nuevo_representante_id = $rep->save();
+            // 1. Guardamos al padre (Devuelve el ID)
+            $nuevo_representante_id = $rep->save(); 
 
             if (!$nuevo_representante_id) {
                 throw new Exception("No se pudo crear el representante.");
             }
 
-            // Asociar atletas si enviaron IDs
+            // 2. Vinculamos a los hijos delegando la tarea al Modelo
             if (!empty($data->atletas_ids) && is_array($data->atletas_ids)) {
-                $query = "UPDATE atleta SET representante_id = ? WHERE id_atleta = ?";
-                $stmtAtleta = $this->conn->prepare($query);
-                foreach ($data->atletas_ids as $id_atleta) {
-                    $stmtAtleta->execute([$nuevo_representante_id, $id_atleta]);
+                
+                // ¡Magia OOP! El controlador no sabe de SQL, solo manda a vincular
+                if (!$rep->vincularAtletas($nuevo_representante_id, $data->atletas_ids)) {
+                    throw new Exception("Error al procesar la vinculación de atletas.");
                 }
             }
 
+            // 3. Confirmamos la base de datos
             $this->conn->commit();
             Respuesta::enviar(201, "Representante registrado y atletas vinculados con éxito.");
 
@@ -71,7 +76,7 @@ class representanteControlador {
 
 if (isset($_GET['p']) && $_GET['p'] === 'representante') {
     
-    // ¡AQUÍ ESTABA EL DETALLE! Iniciar la sesión antes de validarla
+    // Iniciar la sesión antes de validarla
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }

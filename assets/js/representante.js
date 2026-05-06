@@ -41,8 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
             cedula: document.getElementById('cedula').value.trim(),
             nombres: document.getElementById('nombres').value.trim(),
             apellidos: document.getElementById('apellidos').value.trim(),
-            telefono: document.getElementById('telefono').value.trim(),
-            email: document.getElementById('email').value.trim(),
+            telefonoP: document.getElementById('telefono_principal').value.trim(),
+            telefonoE: document.getElementById('telefono_emergencia').value.trim(),
+            email: document.getElementById('correo').value.trim(),
+            direccion: document.getElementById('direccion_residencia').value.trim(),
             parentesco: document.getElementById('parentesco').value.trim(),
             atletas_ids: atletasAsignados // <-- Aquí va el array de hijos [1, 2]
         };

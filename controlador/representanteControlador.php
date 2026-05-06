@@ -44,7 +44,7 @@ class representanteControlador {
             $rep->direccion_residencia = $data->direccion;
 
             // 1. Guardamos al padre (Devuelve el ID)
-            $nuevo_representante_id = $rep->save(); 
+            $nuevo_representante_id = $rep->saveReturnID(); 
 
             if (!$nuevo_representante_id) {
                 throw new Exception("No se pudo crear el representante.");

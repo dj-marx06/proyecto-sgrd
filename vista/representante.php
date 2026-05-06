@@ -26,16 +26,44 @@
     <?php include RAIZ . 'vista/complementos/menu.php'; ?>
 
     <main class="flex-1 p-8 overflow-y-auto">
-        <header class="flex justify-between items-center mb-12">
+
+
+        <header class="flex justify-between items-center mb-20">
             <h1 class="text-2xl font-bold text-white">Gestión de Representantes</h1>
-            
-            <!-- Perfil y Salida[cite: 20] -->
-            <div class="flex items-center gap-3 border-l border-gray-700 pl-6">
-                <div class="text-right mr-2">
-                    <p class="text-sm text-white font-medium"><?php echo $_SESSION['nombre'] ?? 'Admin'; ?></p>
-                    <a href="?p=salir" class="text-[10px] text-red-400 hover:text-red-300 font-bold uppercase tracking-widest transition">
-                        Cerrar Sesión <i class="fas fa-sign-out-alt ml-1"></i>
-                    </a>
+            <div class="flex items-center gap-6">
+
+                <!-- Botón Notificaciones -->
+                <div class="relative group flex items-center justify-center w-32 h-10 transition-all duration-300 cursor-pointer">
+                    <div class="absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:opacity-0 group-hover:scale-50 text-gray-400">
+                        <i class="fas fa-bell text-xl"></i>
+                        <span class="absolute top-2 right-12 bg-red-500 w-2 h-2 rounded-full border border-[#0f0d23]"></span>
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 text-white font-bold text-xs uppercase tracking-tighter whitespace-nowrap">
+                        Notificaciones
+                    </div>
+                </div>
+
+                <!-- Botón Guía de Ayuda -->
+                <div class="relative group flex items-center justify-center w-32 h-10 transition-all duration-300 cursor-pointer">
+                    <div class="absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:opacity-0 group-hover:scale-50 text-gray-400">
+                        <i class="fas fa-question-circle text-xl"></i>
+                        <span class="absolute top-2 right-12 bg-red-500 w-2 h-2 rounded-full border border-[#0f0d23]"></span>
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 text-white font-bold text-xs uppercase tracking-tighter whitespace-nowrap">
+                        Guía de ayuda
+                    </div>
+                </div>
+
+                <!-- Perfil y Botón de Salida -->
+                <div class="flex items-center gap-3 border-l border-gray-700 pl-6">
+                    <div class="text-right mr-2">
+                        <p class="text-sm text-white font-medium"><?php echo $_SESSION['nombre']; ?></p>
+                        <a href="?p=salir" class="text-[10px] text-red-400 hover:text-red-300 font-bold uppercase tracking-widest transition">
+                            Cerrar Sesión <i class="fas fa-sign-out-alt ml-1"></i>
+                        </a>
+                    </div>
+                    <img src="https://ui-avatars.com/api/?name=<?php echo $_SESSION['nombre']; ?>&background=4f46e5&color=fff" 
+                         class="w-10 h-10 rounded-full border-2 border-indigo-500 shadow-lg shadow-indigo-500/20">
                 </div>
             </div>
         </header>
@@ -84,88 +112,95 @@
     </main>
 
     <!-- MODAL DE REGISTRO (CON SELECCIÓN MULTIPLE DE ATLETAS) -->
-    <div id="modalRepresentante" class="fixed inset-0 bg-[#0f0d23]/90 backdrop-blur-md hidden flex items-center justify-center p-4 z-50">
-        <div class="tarjeta w-full max-w-3xl p-8 shadow-2xl transform transition-all scale-95 animate-in zoom-in duration-300">
-            <div class="flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
-                <div class="flex items-center gap-3">
-                    <div class="bg-indigo-600 p-2 rounded-lg text-white"><i class="fas fa-user-shield"></i></div>
-                    <h2 class="text-xl font-bold text-white">Registro de Representante</h2>
-                </div>
-                <button type="button" onclick="cerrarModalRepresentante()" class="text-gray-500 hover:text-white transition-colors"><i class="fas fa-times text-2xl"></i></button>
+   <div id="modalRepresentante" class="fixed inset-0 bg-[#0f0d23]/95 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
+        <div class="tarjeta w-full max-w-4xl p-8 shadow-2xl overflow-y-auto max-h-[90vh]">
+            <div class="flex justify-between items-center mb-6 border-b border-gray-800 pb-4">
+                <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                    <i class="fas fa-id-card text-indigo-500"></i> Ficha del Representante
+                </h2>
+                <button onclick="cerrarModalRepresentante()" class="text-gray-500 hover:text-white"><i class="fas fa-times text-xl"></i></button>
             </div>
 
-            <form id="formRepresentante">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Datos Personales -->
-                    <div class="space-y-4 border-r border-gray-800 pr-4">
-                        <h3 class="text-sm text-indigo-400 font-bold uppercase tracking-widest mb-4">Datos Personales</h3>
+            <form id="formRepresentante" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <div class="space-y-4">
+                        <p class="text-[10px] text-indigo-400 font-bold uppercase tracking-tighter">Información de Identidad</p>
                         
-                        <div class="space-y-2">
-                            <label class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Cédula</label>
-                            <input type="text" id="cedula" required class="input-dark w-full p-3 rounded-xl">
+                        <div class="space-y-1">
+                            <label class="text-[11px] text-gray-500 font-bold ml-1">CÉDULA</label>
+                            <input type="text" id="cedula" name="cedula" required class="input-dark w-full p-3 rounded-xl" placeholder="Ej: 25888999">
                         </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div class="space-y-2">
-                                <label class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Nombres</label>
-                                <input type="text" id="nombres" required class="input-dark w-full p-3 rounded-xl">
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-[11px] text-gray-500 font-bold ml-1">NOMBRES</label>
+                                <input type="text" id="nombres" name="nombres" required class="input-dark w-full p-3 rounded-xl">
                             </div>
-                            <div class="space-y-2">
-                                <label class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Apellidos</label>
-                                <input type="text" id="apellidos" required class="input-dark w-full p-3 rounded-xl">
+                            <div class="space-y-1">
+                                <label class="text-[11px] text-gray-500 font-bold ml-1">APELLIDOS</label>
+                                <input type="text" id="apellidos" name="apellidos" required class="input-dark w-full p-3 rounded-xl">
                             </div>
                         </div>
-                        <div class="space-y-2">
-                            <label class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Teléfono</label>
-                            <input type="text" id="telefono" required class="input-dark w-full p-3 rounded-xl">
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-[11px] text-gray-500 font-bold ml-1">TLF. PRINCIPAL</label>
+                                <input type="text" id="telefono_principal" name="telefono_principal" required class="input-dark w-full p-3 rounded-xl">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[11px] text-gray-500 font-bold ml-1">TLF. EMERGENCIA</label>
+                                <input type="text" id="telefono_emergencia" name="telefono_emergencia" class="input-dark w-full p-3 rounded-xl">
+                            </div>
                         </div>
-                        <div class="space-y-2">
-                            <label class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Email</label>
-                            <input type="email" id="email" class="input-dark w-full p-3 rounded-xl">
+
+                        <div class="space-y-1">
+                            <label class="text-[11px] text-gray-500 font-bold ml-1">CORREO ELECTRÓNICO</label>
+                            <input type="email" id="correo" name="correo" class="input-dark w-full p-3 rounded-xl">
                         </div>
                     </div>
 
-                    <!-- Vinculación de Atletas (La Magia 1:N) -->
-                    <div class="space-y-4 pl-2">
-                        <h3 class="text-sm text-indigo-400 font-bold uppercase tracking-widest mb-4">Vincular Atletas</h3>
-                        
-                        <div class="space-y-2">
-                            <label class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Parentesco</label>
-                            <select id="parentesco" class="input-dark w-full p-3 rounded-xl">
+                    <div class="space-y-4">
+                        <p class="text-[10px] text-emerald-400 font-bold uppercase tracking-tighter">Localización y Parentesco</p>
+
+                        <div class="space-y-1">
+                            <label class="text-[11px] text-gray-500 font-bold ml-1">PARENTESCO CON EL ATLETA</label>
+                            <select id="parentesco" name="parentesco" class="input-dark w-full p-3 rounded-xl">
                                 <option value="Padre/Madre">Padre / Madre</option>
                                 <option value="Tío/a">Tío / Tía</option>
                                 <option value="Abuelo/a">Abuelo / Abuela</option>
-                                <option value="Otro">Otro (Legal)</option>
+                                <option value="Representante Legal">Representante Legal</option>
                             </select>
                         </div>
 
-                        <!-- Lista scrolleable de checkboxes para Tailwind -->
-                        <div class="space-y-2 mt-4">
-                            <label class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Seleccionar Atletas (Sin asignar)</label>
-                            <div class="input-dark rounded-xl h-40 overflow-y-auto p-2 space-y-1" id="listaAtletasCheckbox">
-                                <!-- Se llena dinámicamente con JS, pero aquí un ejemplo estático -->
-                                <label class="flex items-center gap-3 p-2 hover:bg-white/5 rounded cursor-pointer transition">
-                                    <input type="checkbox" name="atletas[]" value="1" class="w-4 h-4 text-indigo-600 bg-gray-800 border-gray-600 rounded">
-                                    <span class="text-sm text-gray-300">Miguel Pirolo (V-25.000.000)</span>
-                                </label>
-                                <label class="flex items-center gap-3 p-2 hover:bg-white/5 rounded cursor-pointer transition">
-                                    <input type="checkbox" name="atletas[]" value="2" class="w-4 h-4 text-indigo-600 bg-gray-800 border-gray-600 rounded">
-                                    <span class="text-sm text-gray-300">Ana Pérez (V-30.123.456)</span>
-                                </label>
+                        <div class="space-y-1">
+                            <label class="text-[11px] text-gray-500 font-bold ml-1">DIRECCIÓN DE RESIDENCIA</label>
+                            <textarea id="direccion_residencia" name="direccion_residencia" rows="2" class="input-dark w-full p-3 rounded-xl resize-none"></textarea>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-[11px] text-gray-500 font-bold ml-1">SELECCIONAR ATLETAS A CARGO</label>
+                            <div class="input-dark rounded-xl h-32 overflow-y-auto p-2 scroll-custom space-y-1" id="contenedorCheckboxes">
+                                <div class="flex items-center gap-3 p-2 hover:bg-white/5 rounded-lg cursor-pointer">
+                                    <input type="checkbox" name="atletas[]" value="1" class="w-4 h-4 rounded border-gray-700 bg-gray-900 text-indigo-600">
+                                    <span class="text-xs text-gray-300">Cargando lista de atletas...</span>
+                                </div>
                             </div>
-                            <p class="text-[10px] text-gray-500 mt-1">* Puedes seleccionar varios atletas si son hermanos.</p>
+                            <p class="text-[9px] text-gray-600 mt-1">* Se muestran atletas que aún no tienen representante asignado.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-8 flex gap-3">
-                    <button type="button" onclick="cerrarModalRepresentante()" class="flex-1 bg-gray-800 text-gray-400 py-4 rounded-xl font-bold transition hover:bg-gray-700">CANCELAR</button>
-                    <button type="submit" id="btnGuardar" class="flex-[2] bg-indigo-600 hover:bg-indigo-500 py-4 rounded-xl font-bold text-white shadow-lg shadow-indigo-500/20 active:scale-95 transition">
-                        GUARDAR Y VINCULAR
+                <div class="flex gap-4 pt-4 border-t border-gray-800">
+                    <button type="button" onclick="cerrarModalRepresentante()" class="flex-1 bg-gray-800 text-gray-400 py-4 rounded-xl font-bold hover:bg-gray-700 transition">CANCELAR</button>
+                    <button type="submit" id="btnGuardar" class="flex-[2] bg-indigo-600 hover:bg-indigo-500 text-white py-4 rounded-xl font-bold shadow-lg shadow-indigo-500/20">
+                        GUARDAR Y ASOCIAR <i class="fas fa-save ml-2"></i>
                     </button>
                 </div>
             </form>
         </div>
     </div>
+    <!-- Fin del modal -->
 
     <!-- Referencia a utilidades globales -->
     <script src="assets/js/alertas.js"></script>

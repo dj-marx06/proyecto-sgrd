@@ -19,7 +19,7 @@
         </div>
 
         <div class="flex items-center gap-3 p-3 rounded-xl transition cursor-pointer group hover:text-white hover:bg-white/5">
-            <i class="fas fa-user-tie w-5 text-center text-indigo-400 group-hover:text-white"></i> 
+            <i class="fas fa-user-tie w-5 text-center text-indigo-400 group-hover:text-white <?php echo ($pagina == 'entrenador')  ? 'bg-white/10 text-white' : ''; ?>">
             <span>Entrenadores</span>
         </div>
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atletas | SGRD</title>
+    <title>Entrenador | SGRD</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- SweetAlert2 para las animaciones de éxito/error -->
@@ -65,7 +65,7 @@
             </div>
         </header>
         
-        <!-- SECCIÓN DE CONTROL (Búsqueda y Nuevo Atleta) -->
+        <!-- SECCIÓN DE CONTROL (Búsqueda y Nuevo entrenador) -->
         <div class="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
             <div class="flex items-center gap-2 text-sm text-indigo-400">
                 <i class="fas fa-user-tie"></i>
@@ -79,7 +79,7 @@
                            class="input-dark w-full pl-11 pr-4 py-3 rounded-xl text-sm shadow-inner">
                 </div>
                 <button onclick="abrirModalCrear()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-xl font-bold transition-all flex items-center gap-2 shadow-lg shadow-indigo-500/20 active:scale-95">
-                    <i class="fas fa-plus"></i> Nuevo Atleta
+                    <i class="fas fa-plus"></i> Nuevo Entrenador
                 </button>
             </div>
         </div>
@@ -105,25 +105,25 @@
                         </tr>
                     </thead>
                     <tbody class="text-sm divide-y divide-gray-800">
-                        <?php foreach($Entrenador as $e): ?>
-                        <tr class="hover:bg-white/5 transition-colors group atleta-row" data-cedula="<?php echo $e['cedula']; ?>">
+                        <?php foreach($Entrenador as $a): ?>
+                        <tr class="hover:bg-white/5 transition-colors group atleta-row" data-cedula="<?php echo $a['cedula']; ?>">
                             <td class="p-4 flex items-center gap-3">
                                 <div class="bg-indigo-500/10 p-2 rounded-lg text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-all">
                                     <i class="fas fa-user"></i>
                                 </div>
-                                <p class="text-white font-medium"><?php echo $e['nombres']." ".$e['apellidos']; ?></p>
+                                <p class="text-white font-medium"><?php echo $a['nombres']." ".$a['apellidos']; ?></p>
                             </td>
-                            <td class="p-4 font-mono"><?php echo $e['cedula']; ?></td>
-                            <td class="p-4 text-white"><?php echo $e['edad']; ?> años</td>
+                            <td class="p-4 font-mono"><?php echo $a['cedula']; ?></td>
+                            <td class="p-4 text-white"><?php echo $a['edad']; ?> años</td>
                             <td class="p-4 text-right">
                                 <div class="flex justify-end gap-2">
-                                    <button onclick='verDetalles(<?php echo json_encode($e); ?>)' class="w-9 h-9 rounded-xl flex items-center justify-center bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500 hover:text-white transition-all" title="Ver Perfil">
+                                    <button onclick='verDetalles(<?php echo json_encode($a); ?>)' class="w-9 h-9 rounded-xl flex items-center justify-center bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500 hover:text-white transition-all" title="Ver Perfil">
                                         <i class="fas fa-eye"></i>
                                     </button>
-                                    <button onclick='editarEntrenador(<?php echo json_encode($e); ?>)' class="w-9 h-9 rounded-xl flex items-center justify-center bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500 hover:text-white transition-all" title="Editar">
+                                    <button onclick='editarEntrenador(<?php echo json_encode($a); ?>)' class="w-9 h-9 rounded-xl flex items-center justify-center bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500 hover:text-white transition-all" title="Editar">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <button onclick="confirmarEliminar(<?php echo $e['id_entrenador']; ?>)" class="w-9 h-9 rounded-xl flex items-center justify-center bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition-all" title="Eliminar">
+                                    <button onclick="confirmarEliminar(<?php echo $a['id_entrenador']; ?>)" class="w-9 h-9 rounded-xl flex items-center justify-center bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition-all" title="Eliminar">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
@@ -173,8 +173,6 @@
                             <option value="F">Femenino</option>
                         </select>
                     </div>
-                            <?php endforeach; ?>
-                        </div>
                     </div>
                 </div>
                 <div class="mt-8 flex gap-3">

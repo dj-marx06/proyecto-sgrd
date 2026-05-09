@@ -35,7 +35,7 @@ public function vincularAtletas($id_representante, $atletas_ids) {
             'atletas_vinculados' => $atletas_ids
         ]);
         
-        $this->registrarBitacora('VINCULAR_ATLETAS', $detalles);
+        // $this->registrarBitacora('VINCULAR_ATLETAS', $detalles);
 
         return true;
     }

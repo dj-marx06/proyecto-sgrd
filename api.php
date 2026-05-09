@@ -1,6 +1,6 @@
 <?php
 // api.php ( Enrutador Frontal)
-
+// session_start();
 // 1. Cabeceras de seguridad estrictas
 header('Content-Type: application/json; charset=utf-8');
 // CSP corregido
@@ -44,7 +44,7 @@ try {
     // 5. Seguridad: Lista Blanca
     // Si tus compañeros adaptan sus módulos, los agregas aquí. 
     // Por ahora, blindamos tu módulo de Representante.
-    $permitidos = ['RepresentanteController'];
+    $permitidos = ['representanteControlador'];
     if (!in_array($controllerName, $permitidos)) {
         Respuesta::enviar(403, "Módulo no autorizado o bloqueado por seguridad.");
     }

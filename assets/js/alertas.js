@@ -1,7 +1,7 @@
 // alertas.js - Gestor centralizado de SweetAlert2
 
 const UI = {
-    // Configuración base (tus colores oscuros estandarizados)
+    // Configuración base ( colores oscuros estandarizados)
     config: {
         background: '#161430',
         color: '#fff',

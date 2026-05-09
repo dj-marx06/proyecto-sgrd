@@ -16,6 +16,9 @@ class representanteControlador {
             case 'registrar':
                 $this->registrar();
                 break;
+            case 'listarAtletas': // Nueva acción para el modal
+                $this->listarAtletas();
+                break;
             default:
                 Respuesta::enviar(404, "Acción no válida");
         }
@@ -44,7 +47,7 @@ class representanteControlador {
             $rep->direccion_residencia = $data->direccion;
 
             // 1. Guardamos al padre (Devuelve el ID)
-            $nuevo_representante_id = $rep->save(); 
+            $nuevo_representante_id = $rep->saveReturnID(); 
 
             if (!$nuevo_representante_id) {
                 throw new Exception("No se pudo crear el representante.");
@@ -66,6 +69,23 @@ class representanteControlador {
         } catch (Exception $e) {
             $this->conn->rollBack();
             Respuesta::enviar(500, "Error en la transacción: " . $e->getMessage());
+        }
+    }
+
+    private function listarAtletas() {
+        try {
+            // Instanciamos un modelo genérico para la tabla atleta
+            // (O puedes crear la clase Atleta.php si prefieres)
+
+            $rep = new Atleta();                
+            $lista = $rep->listarAtletas();
+
+            /* $rep = new Representante($this->conn); 
+            $lista = $rep->getAll("nombres ASC"); // Los trae ordenados por nombres */
+
+            echo json_encode($lista);
+        } catch (Exception $e) {
+            Respuesta::enviar(500, "Error al cargar atletas: " . $e->getMessage());
         }
     }
 }

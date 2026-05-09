@@ -3,13 +3,53 @@
 const modalRep = document.getElementById('modalRepresentante');
 const formRep = document.getElementById('formRepresentante');
 
-function abrirModalRepresentante() {
+async function abrirModalRepresentante() {
     formRep.reset(); // Limpia los campos
-    modalRep.classList.remove('hidden');
     // Animación suave
     setTimeout(() => {
         modalRep.firstElementChild.classList.remove('scale-95', 'opacity-0');
     }, 10);
+
+    // Cargar atletas
+    const contenedor = document.getElementById('contenedorCheckboxes');
+    contenedor.innerHTML = '<p class="text-xs text-gray-500 animate-pulse p-2">Consultando atletas...</p>';
+
+    try {
+        // 1. Pedimos los atletas al controlador a través del API
+        const respuesta = await fetch('api.php?c=representante&accion=listarAtletas');
+        const atletas = await respuesta.json();
+
+        if (atletas.length > 0) {
+            contenedor.innerHTML = ''; // Limpiamos el mensaje de carga
+            
+            // 2. Construimos los checkboxes dinámicamente
+            atletas.forEach(atleta => {
+                const div = document.createElement('div');
+                div.className = "flex items-center gap-3 p-2 hover:bg-white/5 rounded-lg cursor-pointer transition";
+                div.innerHTML = `
+                    <input type="checkbox" name="atletas[]" value="${atleta.id_atleta}" 
+                           id="atleta_${atleta.id_atleta}"
+                           class="w-4 h-4 rounded border-gray-700 bg-gray-900 text-indigo-600 focus:ring-indigo-500">
+                    <label for="atleta_${atleta.id_atleta}" class="text-xs text-gray-300 cursor-pointer flex-1">
+                        ${atleta.nombres} ${atleta.apellidos} 
+                        <span class="text-[10px] text-gray-500 ml-1">(${atleta.cedula})</span>
+                    </label>
+                `;
+                contenedor.appendChild(div);
+            });
+        } else {
+            contenedor.innerHTML = '<p class="text-xs text-yellow-500 p-2">No hay atletas registrados sin representante.</p>';
+        }
+
+    } catch (error) {
+        contenedor.innerHTML = '<p class="text-xs text-red-500 p-2">Error al cargar la lista.</p>';
+    }
+
+    //Fin Cargar atletas
+
+    modalRep.classList.remove('hidden');
+
+
 }
 
 function cerrarModalRepresentante() {
@@ -41,15 +81,17 @@ document.addEventListener('DOMContentLoaded', () => {
             cedula: document.getElementById('cedula').value.trim(),
             nombres: document.getElementById('nombres').value.trim(),
             apellidos: document.getElementById('apellidos').value.trim(),
-            telefono: document.getElementById('telefono').value.trim(),
-            email: document.getElementById('email').value.trim(),
+            telefonoP: document.getElementById('telefono_principal').value.trim(),
+            telefonoE: document.getElementById('telefono_emergencia').value.trim(),
+            email: document.getElementById('correo').value.trim(),
+            direccion: document.getElementById('direccion_residencia').value.trim(),
             parentesco: document.getElementById('parentesco').value.trim(),
             atletas_ids: atletasAsignados // <-- Aquí va el array de hijos [1, 2]
         };
 
         try {
             // 3. Enviamos al API REST
-            const respuesta = await fetch('api.php?c=Representante&accion=registrar', {
+            const respuesta = await fetch('api.php?c=representante&accion=registrar', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(datos)

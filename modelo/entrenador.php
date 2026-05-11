@@ -50,7 +50,7 @@ class Entrenador extends Conexion {
     public function editarEntrenador($datos) {
         $conex = $this->getConex1();
         try {
-            $sql = "UPDATE entrenado SET cedula = :cedula, nombres = :nombres, apellidos = :apellidos, 
+            $sql = "UPDATE entrenador SET cedula = :cedula, nombres = :nombres, apellidos = :apellidos, 
                     fecha_nacimiento = :fecha_nac, genero = :genero WHERE id_entrenador = :id";
             $stmt = $conex->prepare($sql);
             return $stmt->execute([

@@ -9,9 +9,7 @@ document.getElementById('busquedaCedula').addEventListener('input', function(e) 
     });
 });
 
-// --- 2. GESTIÓN DE ALERTAS (SWEETALERT2) Y LIMPIEZA DE URL ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Intentamos obtener el mensaje desde la URL (?m=...) o desde la variable PHP
     const urlParams = new URLSearchParams(window.location.search);
     const msg = urlParams.get('m') || (typeof MENSAJE_PHP !== 'undefined' ? MENSAJE_PHP : '');
 
@@ -28,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             Swal.fire({
                 ...configDefault,
                 title: '¡Excelente!',
-                text: 'El Entrenador ha sido registrado con éxito.',
+                text: 'El entrenador ha sido registrado con éxito.',
                 icon: 'success'
             });
         } else if (msg === "editado") {
@@ -47,14 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // --- EL AJUSTE CLAVE: Limpiar la URL sin recargar la página ---
-        // Esto evita que al dar F5 se vuelva a mostrar la alerta
         const urlLimpia = window.location.origin + window.location.pathname + "?p=entrenador";
         window.history.replaceState({}, document.title, urlLimpia);
     }
 });
 
-// --- 3. LÓGICA DE MODALES (FORMULARIO Y DETALLES) ---
 const modalForm = document.getElementById('modalEntrenador');
 const modalVer = document.getElementById('modalVer');
 
@@ -63,8 +58,7 @@ function abrirModalCrear() {
     form.reset();
     document.getElementById('id_entrenador').value = "";
     document.getElementById('modalTitulo').innerText = "Nuevo Entrenador";
-
-    modalForm.classList.remove('hidden');
+     modalForm.classList.remove('hidden');
 }
 
 function editarEntrenador(datos) {
@@ -74,7 +68,6 @@ function editarEntrenador(datos) {
     document.getElementById('apellidos').value = datos.apellidos;
     document.getElementById('fecha_nacimiento').value = datos.fecha_nacimiento;
     document.getElementById('genero').value = datos.genero;
-    
     document.getElementById('modalTitulo').innerText = "Editar Entrenador";
     modalForm.classList.remove('hidden');
 }
@@ -96,6 +89,7 @@ function verDetalles(datos) {
                     <p class="text-[10px] uppercase text-gray-500 font-bold">Género</p>
                     <p class="text-white">${datos.genero === 'M' ? 'Masculino' : 'Femenino'}</p>
                 </div>
+                <div>
             </div>
         </div>
     `;
@@ -118,22 +112,21 @@ function confirmarEliminar(id) {
         color: '#fff'
     }).then((result) => {
         if (result.isConfirmed) {
-            // Redirige al controlador con el ID y el mensaje de eliminación
             window.location.href = `?p=entrenador&eliminar=${id}&m=eliminado`;
         }
     });
 }
 
-// --- 5. FUNCIONES DE CIERRE ---
 function cerrarModal() { 
     modalForm.classList.add('hidden'); 
+    modalForm.classList.remove('flex');
 }
 
 function cerrarModalVer() { 
     modalVer.classList.add('hidden'); 
 }
 
-// Cerrar modales al presionar la tecla Escape
+
 document.addEventListener('keydown', (e) => {
     if (e.key === "Escape") {
         cerrarModal();
